@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Digital Presence – 7-Day Trial Activation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color-scheme: light;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #f5f7fb;
+      color: #111827;
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+    .page {
+      width: 100%;
+      max-width: 1000px;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(15,23,42,0.12);
+      padding: 20px 18px 28px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 18px;
+    }
+    @media (max-width: 800px) {
+      .page {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+    h1 {
+      margin: 0 0 4px;
+      font-size: 22px;
+      letter-spacing: 0.01em;
+    }
+    .tagline {
+      margin: 0 0 14px;
+      color: #6b7280;
+      font-size: 13px;
+    }
+    h2 {
+      margin: 16px 0 8px;
+      font-size: 16px;
+    }
+    h3 {
+      margin: 10px 0 6px;
+      font-size: 14px;
+    }
+    .card {
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      padding: 12px 12px 14px;
+      background: #f9fafb;
+      margin-bottom: 10px;
+    }
+    .card.primary {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+    }
+    label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 3px;
+      color: #374151;
+    }
+    input[type="text"],
+    input[type="tel"],
+    input[type="number"] {
+      width: 100%;
+      padding: 7px 8px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 13px;
+    }
+    input:disabled {
+      background: #e5e7eb;
+    }
+    .row {
+      display: flex;
+      gap: 10px;
+    }
+    .row > div {
+      flex: 1;
+      min-width: 0;
+    }
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.05s ease, box-shadow 0.05s ease;
+      white-space: nowrap;
+    }
+    button.primary {
+      background: #2563eb;
+      color: white;
+      box-shadow: 0 6px 18px rgba(37,99,235,0.35);
+    }
+    button.secondary {
+      background: #e5e7eb;
+      color: #111827;
+    }
+    button:active {
+      transform: translateY(1px);
+      box-shadow: 0 3px 10px rgba(15,23,42,0.2);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #e0f2fe;
+      color: #0369a1;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 11px;
+      margin-bottom: 6px;
+    }
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .status-pill.active {
+      background: #dcfce7;
+      color: #166534;
+    }
+    .status-pill.inactive {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+    .status-pill.pending {
+      background: #fef3c7;
+      color: #92400e;
+    }
+    .muted {
+      font-size: 12px;
+      color: #6b7280;
+    }
+    .highlight {
+      font-weight: 700;
+      color: #111827;
+    }
+    .big-number {
+      font-size: 28px;
+      font-weight: 700;
+    }
+    .sub-label {
+      font-size: 11px;
+      color: #6b7280;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 10px;
+    }
+    @media (max-width: 600px) {
+      .grid-2 {
+        grid-template-columns: minmax(0,1fr);
+      }
+    }
+    .otp-box {
+      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 14px;
+      letter-spacing: 0.18em;
+      background: #0f172a;
+      color: #e5e7eb;
+      border-radius: 10px;
+      padding: 8px 10px;
+      text-align: center;
+      margin-top: 6px;
+    }
+    .info-list {
+      margin: 6px 0 0;
+      padding-left: 18px;
+      font-size: 12px;
+      color: #4b5563;
+    }
+    .info-list li {
+      margin-bottom: 2px;
+    }
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .pill {
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      color: #374151;
+    }
+    .pill.good {
+      background: #dcfce7;
+      color: #166534;
+    }
+    .pill.warn {
+      background: #fef3c7;
+      color: #92400e;
+    }
+    .pill.bad {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+    .divider {
+      border-top: 1px dashed #e5e7eb;
+      margin: 10px 0;
+    }
+    .footer-note {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- LEFT COLUMN: Promotor + Owner activation -->
+    <div>
+      <h1>Digital Presence – Trial & Challenge</h1>
+      <p class="tagline">Promotor sets it up. Owner activates. System counts. Discounts unlock.</p>
+
+      <!-- Promotor Setup -->
+      <div class="card">
+        <div class="badge">For Promotor</div>
+        <h2>Store Setup</h2>
+        <p class="muted">Fill this once per store. This information appears on the owner’s activation screen.</p>
+
+        <label for="storeName">Store name</label>
+        <input id="storeName" type="text" placeholder="Example: Sunrise Bakery" />
+
+        <div class="row" style="margin-top:6px;">
+          <div>
+            <label for="ownerPhone">Owner phone (for OTP demo)</label>
+            <input id="ownerPhone" type="tel" placeholder="+599 9 xxx xxxx" />
+          </div>
+          <div>
+            <label for="campaignLabel">Campaign label</label>
+            <input id="campaignLabel" type="text" placeholder="100 shares / 7 days" />
+          </div>
+        </div>
+
+        <div class="divider"></div>
+        <h3>Challenge Settings (flexible)</h3>
+        <div class="grid-2">
+          <div>
+            <label for="primaryGoal">Primary goal – shares</label>
+            <input id="primaryGoal" type="number" min="1" value="500" />
+            <span class="sub-label">E.g. 500 shares → 40% discount</span>
+          </div>
+          <div>
+            <label for="primaryDiscount">Primary discount %</label>
+            <input id="primaryDiscount" type="number" min="0" max="100" value="40" />
+          </div>
+        </div>
+        <div class="grid-2" style="margin-top:6px;">
+          <div>
+            <label for="secondaryGoal">Secondary goal – shares</label>
+            <input id="secondaryGoal" type="number" min="1" value="100" />
+            <span class="sub-label">E.g. 100 shares → 50% campaign</span>
+          </div>
+          <div>
+            <label for="secondaryDiscount">Secondary discount % (suggested)</label>
+            <input id="secondaryDiscount" type="number" min="0" max="100" value="50" />
+          </div>
+        </div>
+
+        <div style="margin-top:10px; display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <button class="secondary" id="saveSetupBtn">💾 Save setup</button>
+          <button class="secondary" id="resetAllBtn">🗑 Reset store state</button>
+          <span class="muted" id="setupStatus"></span>
+        </div>
+
+        <ul class="info-list">
+          <li>Setup is stored in this browser (localStorage) – one file per store.</li>
+          <li>Promotor can share this page link and the owner does the activation.</li>
+        </ul>
+      </div>
+
+      <!-- Owner Activation -->
+      <div class="card primary">
+        <div class="badge">For Store Owner</div>
+        <h2>Activate Your 7-Day Trial</h2>
+        <p class="muted">
+          Store: <span class="highlight" id="storeNameDisplay">– not set –</span><br>
+          Campaign: <span class="highlight" id="campaignLabelDisplay">– not set –</span>
+        </p>
+
+        <div id="activationSection">
+          <h3>Step 1 – Request OTP</h3>
+          <label for="ownerPhoneReadonly">Your phone number</label>
+          <input id="ownerPhoneReadonly" type="tel" disabled />
+          <p class="muted">If this number is wrong, contact your promotor to correct it.</p>
+
+          <button class="primary" id="sendOtpBtn">📨 Send activation code</button>
+          <div id="otpSentMsg" class="muted" style="margin-top:6px;"></div>
+          <div id="otpDemoBox" class="otp-box" style="display:none;"></div>
+
+          <div class="divider"></div>
+
+          <h3>Step 2 – Enter OTP & Activate</h3>
+          <label for="otpInput">Enter 6-digit activation code</label>
+          <input id="otpInput" type="text" maxlength="6" placeholder="••••••" />
+          <div style="margin-top:8px;">
+            <button class="primary" id="activateBtn">✅ Activate 7-day trial</button>
+          </div>
+          <p class="muted" id="activationError" style="margin-top:6px; color:#b91c1c;"></p>
+
+          <ul class="info-list">
+            <li>After activation, the 7-day countdown starts immediately.</li>
+            <li>Your promotor can update pictures & promo text during the trial.</li>
+          </ul>
+        </div>
+
+        <div id="alreadyActiveSection" style="display:none;">
+          <p class="muted">Your trial is already active.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN: Countdown, shares, rewards -->
+    <div>
+      <div class="card">
+        <h2>Trial Status & Countdown</h2>
+        <div id="statusPill" class="status-pill pending">Pending activation</div>
+        <p class="muted" id="trialDates"></p>
+
+        <div class="grid-2" style="margin-top:6px;">
+          <div>
+            <div class="sub-label">Time remaining</div>
+            <div class="big-number" id="timeRemaining">–:–:–</div>
+          </div>
+          <div>
+            <div class="sub-label">Total shares counted</div>
+            <div class="big-number" id="shareCount">0</div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+        <h3>Share Counter (Demo)</h3>
+        <p class="muted">
+          In real use this connects to QR scans / link analytics. For now, use this button to simulate.
+        </p>
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <button class="secondary" id="addShareBtn">➕ I shared my QR</button>
+          <button class="secondary" id="removeShareBtn">➖ Undo share</button>
+          <span class="muted" id="shareStatus"></span>
+        </div>
+
+        <ul class="info-list">
+          <li>Once the 7 days are over, no more shares are counted.</li>
+          <li>Promotor uses this number to decide discounts & upgrades.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Reward Preview (For Promotor)</h2>
+        <p class="muted">Based on your configured campaign, this shows a suggested reward tier.</p>
+
+        <div id="rewardSummary" class="muted">
+          No trial yet. Configure the store and activate the trial to see suggestions.
+        </div>
+
+        <div class="pill-row" id="rewardPills"></div>
+
+        <div class="divider"></div>
+        <h3>Suggested Logic (you can adapt)</h3>
+        <ul class="info-list">
+          <li><span class="highlight" id="primaryRuleText"></span></li>
+          <li><span class="highlight" id="secondaryRuleText"></span></li>
+          <li><span class="highlight">Below secondary goal → 30% base discount + call promotor for picture / promo / Spin the Wheel (up to 60%).</span></li>
+        </ul>
+        <p class="footer-note">
+          Final decision is always by promotor. This tool only guides and records.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const STORAGE_KEY = "dp_trial_state_v1";
+
+      let state = {
+        storeName: "",
+        ownerPhone: "",
+        campaignLabel: "100 shares / 7 days",
+        primaryGoal: 500,
+        primaryDiscount: 40,
+        secondaryGoal: 100,
+        secondaryDiscount: 50,
+        activated: false,
+        trialStart: null, // ISO string
+        trialEnd: null,
+        shareCount: 0
+      };
+
+      let currentOtp = null;
+      let countdownInterval = null;
+
+      function loadState() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (raw) {
+            const parsed = JSON.parse(raw);
+            state = Object.assign(state, parsed);
+          }
+        } catch (e) {
+          console.warn("Failed to load state", e);
+        }
+      }
+
+      function saveState() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        } catch (e) {
+          console.warn("Failed to save state", e);
+        }
+      }
+
+      // DOM elements
+      const storeNameInput = document.getElementById("storeName");
+      const ownerPhoneInput = document.getElementById("ownerPhone");
+      const campaignLabelInput = document.getElementById("campaignLabel");
+      const primaryGoalInput = document.getElementById("primaryGoal");
+      const primaryDiscountInput = document.getElementById("primaryDiscount");
+      const secondaryGoalInput = document.getElementById("secondaryGoal");
+      const secondaryDiscountInput = document.getElementById("secondaryDiscount");
+      const saveSetupBtn = document.getElementById("saveSetupBtn");
+      const resetAllBtn = document.getElementById("resetAllBtn");
+      const setupStatus = document.getElementById("setupStatus");
+
+      const storeNameDisplay = document.getElementById("storeNameDisplay");
+      const campaignLabelDisplay = document.getElementById("campaignLabelDisplay");
+      const ownerPhoneReadonly = document.getElementById("ownerPhoneReadonly");
+      const sendOtpBtn = document.getElementById("sendOtpBtn");
+      const otpSentMsg = document.getElementById("otpSentMsg");
+      const otpDemoBox = document.getElementById("otpDemoBox");
+      const otpInput = document.getElementById("otpInput");
+      const activateBtn = document.getElementById("activateBtn");
+      const activationError = document.getElementById("activationError");
+      const activationSection = document.getElementById("activationSection");
+      const alreadyActiveSection = document.getElementById("alreadyActiveSection");
+
+      const statusPill = document.getElementById("statusPill");
+      const trialDates = document.getElementById("trialDates");
+      const timeRemainingEl = document.getElementById("timeRemaining");
+      const shareCountEl = document.getElementById("shareCount");
+      const addShareBtn = document.getElementById("addShareBtn");
+      const removeShareBtn = document.getElementById("removeShareBtn");
+      const shareStatus = document.getElementById("shareStatus");
+
+      const rewardSummary = document.getElementById("rewardSummary");
+      const rewardPills = document.getElementById("rewardPills");
+      const primaryRuleText = document.getElementById("primaryRuleText");
+      const secondaryRuleText = document.getElementById("secondaryRuleText");
+
+      function formatDate(dateStr) {
+        if (!dateStr) return "–";
+        const d = new Date(dateStr);
+        if (isNaN(d)) return "–";
+        return d.toLocaleString();
+      }
+
+      function formatDuration(ms) {
+        if (ms <= 0) return "00:00:00";
+        const totalSeconds = Math.floor(ms / 1000);
+        const h = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
+        const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
+        const s = String(totalSeconds % 60).padStart(2, "0");
+        return `${h}:${m}:${s}`;
+      }
+
+      function updateSetupUI() {
+        storeNameInput.value = state.storeName;
+        ownerPhoneInput.value = state.ownerPhone;
+        campaignLabelInput.value = state.campaignLabel;
+        primaryGoalInput.value = state.primaryGoal;
+        primaryDiscountInput.value = state.primaryDiscount;
+        secondaryGoalInput.value = state.secondaryGoal;
+        secondaryDiscountInput.value = state.secondaryDiscount;
+
+        storeNameDisplay.textContent = state.storeName || "– not set –";
+        campaignLabelDisplay.textContent = state.campaignLabel || "– not set –";
+        ownerPhoneReadonly.value = state.ownerPhone || "";
+      }
+
+      function updateTrialUI() {
+        const now = new Date();
+        let statusText = "Pending activation";
+        let statusClass = "pending";
+        let timeText = "–:–:–";
+
+        if (state.activated && state.trialStart && state.trialEnd) {
+          const start = new Date(state.trialStart);
+          const end = new Date(state.trialEnd);
+          const diff = end - now;
+
+          if (diff > 0) {
+            statusText = "Trial active";
+            statusClass = "active";
+            timeText = formatDuration(diff);
+          } else {
+            statusText = "Trial ended";
+            statusClass = "inactive";
+            timeText = "00:00:00";
+          }
+
+          trialDates.textContent = `Start: ${formatDate(state.trialStart)} · End: ${formatDate(state.trialEnd)}`;
+        } else {
+          trialDates.textContent = "Trial not activated yet.";
+        }
+
+        statusPill.textContent = statusText;
+        statusPill.className = `status-pill ${statusClass}`;
+        timeRemainingEl.textContent = timeText;
+
+        shareCountEl.textContent = state.shareCount;
+
+        activationSection.style.display = state.activated ? "none" : "block";
+        alreadyActiveSection.style.display = state.activated ? "block" : "none";
+      }
+
+      function updateRewardUI() {
+        const goal1 = Number(state.primaryGoal) || 0;
+        const disc1 = Number(state.primaryDiscount) || 0;
+        const goal2 = Number(state.secondaryGoal) || 0;
+        const disc2 = Number(state.secondaryDiscount) || 0;
+        const shares = Number(state.shareCount) || 0;
+
+        primaryRuleText.textContent = goal1
+          ? `Primary: ${goal1}+ shares → suggested ${disc1}% discount (e.g. “Verified” deal).`
+          : "Primary goal not configured.";
+        secondaryRuleText.textContent = goal2
+          ? `Secondary: ${goal2}+ shares → suggested ${disc2}% discount (e.g. special campaign).`
+          : "Secondary goal not configured.";
+
+        rewardPills.innerHTML = "";
+
+        if (!state.activated) {
+          rewardSummary.textContent = "No active trial. Once the owner activates, this area will show a suggested discount tier.";
+          return;
+        }
+
+        let summary = "";
+        let tierClass = "warn";
+
+        if (goal1 && shares >= goal1) {
+          summary = `🎉 The store has reached the PRIMARY goal (${shares}/${goal1}). Suggested reward: ${disc1}% discount.`;
+          tierClass = "good";
+        } else if (goal2 && shares >= goal2) {
+          summary = `✅ The store has reached the SECONDARY goal (${shares}/${goal2}). Suggested reward: ${disc2}% discount or Spin the Wheel up to 60%.`;
+          tierClass = "good";
+        } else {
+          summary = `ℹ The store is below the secondary goal (${shares} shares). Suggested base reward: 30% + upsell extra picture / promo / Spin the Wheel.`;
+          tierClass = "warn";
+        }
+
+        rewardSummary.textContent = summary;
+
+        function addPill(text, cls) {
+          const span = document.createElement("span");
+          span.className = `pill ${cls || ""}`;
+          span.textContent = text;
+          rewardPills.appendChild(span);
+        }
+
+        addPill(`Shares: ${shares}`, tierClass);
+        if (goal1) addPill(`Primary goal: ${goal1} → ${disc1}%`, "good");
+        if (goal2) addPill(`Secondary goal: ${goal2} → ${disc2}%`, "good");
+        addPill("Below secondary → 30% + call promotor", "warn");
+        addPill("Spin the Wheel up to 60%", "good");
+      }
+
+      function startCountdown() {
+        if (countdownInterval) clearInterval(countdownInterval);
+        countdownInterval = setInterval(() => {
+          updateTrialUI();
+        }, 1000);
+      }
+
+      function initFromState() {
+        updateSetupUI();
+        updateTrialUI();
+        updateRewardUI();
+        if (state.activated) startCountdown();
+      }
+
+      // Event handlers
+      saveSetupBtn.addEventListener("click", () => {
+        state.storeName = storeNameInput.value.trim();
+        state.ownerPhone = ownerPhoneInput.value.trim();
+        state.campaignLabel = campaignLabelInput.value.trim() || "100 shares / 7 days";
+        state.primaryGoal = Number(primaryGoalInput.value) || 0;
+        state.primaryDiscount = Number(primaryDiscountInput.value) || 0;
+        state.secondaryGoal = Number(secondaryGoalInput.value) || 0;
+        state.secondaryDiscount = Number(secondaryDiscountInput.value) || 0;
+
+        saveState();
+        updateSetupUI();
+        updateRewardUI();
+
+        setupStatus.textContent = "Setup saved.";
+        setTimeout(() => (setupStatus.textContent = ""), 2000);
+      });
+
+      resetAllBtn.addEventListener("click", () => {
+        if (!confirm("Reset all state for this store in this browser?")) return;
+        localStorage.removeItem(STORAGE_KEY);
+        state = {
+          storeName: "",
+          ownerPhone: "",
+          campaignLabel: "100 shares / 7 days",
+          primaryGoal: 500,
+          primaryDiscount: 40,
+          secondaryGoal: 100,
+          secondaryDiscount: 50,
+          activated: false,
+          trialStart: null,
+          trialEnd: null,
+          shareCount: 0
+        };
+        currentOtp = null;
+        otpSentMsg.textContent = "";
+        otpDemoBox.style.display = "none";
+        otpDemoBox.textContent = "";
+        activationError.textContent = "";
+        loadState();
+        initFromState();
+      });
+
+      sendOtpBtn.addEventListener("click", () => {
+        if (!state.storeName || !state.ownerPhone) {
+          otpSentMsg.textContent = "Please ask your promotor to fill store name and phone first.";
+          otpDemoBox.style.display = "none";
+          otpDemoBox.textContent = "";
+          return;
+        }
+        if (state.activated) {
+          otpSentMsg.textContent = "Trial already activated.";
+          otpDemoBox.style.display = "none";
+          otpDemoBox.textContent = "";
+          return;
+        }
+        currentOtp = String(Math.floor(100000 + Math.random() * 900000));
+        otpSentMsg.textContent = "Demo: activation code generated (in production this is sent via SMS/WhatsApp/email).";
+        otpDemoBox.style.display = "block";
+        otpDemoBox.textContent = currentOtp;
+        activationError.textContent = "";
+      });
+
+      activateBtn.addEventListener("click", () => {
+        activationError.textContent = "";
+        if (state.activated) {
+          activationError.textContent = "Trial is already active.";
+          return;
+        }
+        if (!currentOtp) {
+          activationError.textContent = "Please request an activation code first.";
+          return;
+        }
+        const entered = otpInput.value.trim();
+        if (entered.length !== 6 || entered !== currentOtp) {
+          activationError.textContent = "Invalid activation code. Please check and try again.";
+          return;
+        }
+        const now = new Date();
+        const end = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+        state.activated = true;
+        state.trialStart = now.toISOString();
+        state.trialEnd = end.toISOString();
+        saveState();
+        updateTrialUI();
+        updateRewardUI();
+        startCountdown();
+        otpSentMsg.textContent = "Activation successful. Your 7-day trial has started.";
+        otpDemoBox.style.display = "none";
+        otpDemoBox.textContent = "";
+        currentOtp = null;
+      });
+
+      addShareBtn.addEventListener("click", () => {
+        if (!state.activated) {
+          shareStatus.textContent = "Activate the trial first.";
+          setTimeout(() => (shareStatus.textContent = ""), 1500);
+          return;
+        }
+        const now = new Date();
+        const end = new Date(state.trialEnd);
+        if (now > end) {
+          shareStatus.textContent = "Trial ended. Shares are no longer counted.";
+          setTimeout(() => (shareStatus.textContent = ""), 2000);
+          return;
+        }
+        state.shareCount += 1;
+        saveState();
+        updateTrialUI();
+        updateRewardUI();
+        shareStatus.textContent = "Share counted.";
+        setTimeout(() => (shareStatus.textContent = ""), 1000);
+      });
+
+      removeShareBtn.addEventListener("click", () => {
+        if (state.shareCount <= 0) {
+          shareStatus.textContent = "Nothing to undo.";
+          setTimeout(() => (shareStatus.textContent = ""), 1500);
+          return;
+        }
+        state.shareCount -= 1;
+        saveState();
+        updateTrialUI();
+        updateRewardUI();
+        shareStatus.textContent = "Share removed.";
+        setTimeout(() => (shareStatus.textContent = ""), 1000);
+      });
+
+      // Init
+      loadState();
+      initFromState();
+    })();
+  </script>
+</body>
+</html>
